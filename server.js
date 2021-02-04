@@ -1,5 +1,11 @@
 const app = require("./src/app");
 
-app.listen(8080, () => {
+/**
+ * When deploying the environment may manage the port
+ * Locally we can default to 8080
+ */
+const port = process.env.PORT || 8080;
+
+app.listen(port, () => {
   console.log("server started");
 });
