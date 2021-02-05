@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "deploy": "gcloud app deploy",
     "dev": "nodemon server.js localhost 8080",
     "start": "node server.js",
     "test": "jest",
