@@ -13,4 +13,6 @@
 
 # [START gae_quickstart_yaml]
 runtime: nodejs14
+includes:
+  - env_variables.yaml
 # [END gae_quickstart_yaml]
