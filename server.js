@@ -6,7 +6,7 @@ require("dotenv").config();
  * When deploying the environment may manage the port
  * Locally we can default to 8080
  */
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 8000;
 
 mongoose
   .connect(
@@ -15,7 +15,7 @@ mongoose
   )
   .then(() =>
     app.listen(port, () => {
-      console.log("server started");
+      console.log("server started on " + port);
     })
   )
   .catch((err) => {
