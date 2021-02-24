@@ -3,9 +3,15 @@ const cors = require("cors");
 const { body, validationResult } = require("express-validator");
 const Record = require("../models/record");
 
+const greenList = ["https://handbook-dev.netlify.app", "https://handbook.dev/"];
 const corsOptions = {
-  origin: "https://handbook-dev.netlify.app",
-  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+  origin: function (origin, callback) {
+    if (greenList.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
 };
 
 const router = express.Router();
