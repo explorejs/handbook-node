@@ -17,9 +17,8 @@ const corsOptions = {
 const router = express.Router();
 
 router.options("*", cors());
-router.use(cors(corsOptions));
 
-router.get("/", async (req, res) => {
+router.get("/", cors(corsOptions), async (req, res) => {
   const result = await Record.find({ status: "active" });
   res.send({ data: result });
 });
@@ -29,6 +28,7 @@ router.post(
   body("title").not().isEmpty().trim().escape(),
   body("desc").not().isEmpty().trim().escape(),
   body("tags").isArray({ min: 1 }),
+  cors(corsOptions),
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
