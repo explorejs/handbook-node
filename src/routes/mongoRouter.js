@@ -16,6 +16,7 @@ const corsOptions = {
 
 const router = express.Router();
 
+router.options("*", cors());
 router.use(cors(corsOptions));
 
 router.get("/", async (req, res) => {
