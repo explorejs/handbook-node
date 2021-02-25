@@ -4,21 +4,24 @@ const { body, validationResult } = require("express-validator");
 const Record = require("../models/record");
 
 const greenList = ["https://handbook-dev.netlify.app", "https://handbook.dev/"];
-const corsOptions = {
-  origin: function (origin, callback) {
-    if (greenList.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-};
 
 const router = express.Router();
 
 router.options("*", cors());
+router.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true);
+      if (greenList.indexOf(origin) === -1) {
+        var msg = `This site ${origin} does not have an access. Only specific domains are allowed to access it.`;
+        return callback(new Error(msg), false);
+      }
+      return callback(null, true);
+    },
+  })
+);
 
-router.get("/", cors(corsOptions), async (req, res) => {
+router.get("/", async (req, res) => {
   const result = await Record.find({ status: "active" });
   res.send({ data: result });
 });
@@ -28,7 +31,6 @@ router.post(
   body("title").not().isEmpty().trim().escape(),
   body("desc").not().isEmpty().trim().escape(),
   body("tags").isArray({ min: 1 }),
-  cors(corsOptions),
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
