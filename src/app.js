@@ -4,23 +4,23 @@ const app = Express();
 
 const mongoRouter = require("./routes/mongoRouter");
 
+const greenList = ["https://handbook-dev.netlify.app", "https://handbook.dev/"];
+
 const corsOptions = {
-  origin: "https://handbook-dev.netlify.app",
-  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+  origin: function (origin, callback) {
+    if (greenList.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
 };
 
 app.use(Express.json());
 
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  next();
-});
+app.options("*", cors());
 
-app.use("/mongo", mongoRouter);
+app.use("/mongo", cors(corsOptions), mongoRouter);
 
 app.get("/", cors(corsOptions), (req, res) => {
   res.send({ data: "Hi There" });
