@@ -3,7 +3,7 @@ steps:
     args: ["app", "deploy"]
     timeout: "1600s"
     env:
-      - 'MONGO_USER=${_MONGO_USER}'
-      - 'MONGO_PASSWORD=${_MONGO_PASSWORD}'
-      - 'MONGO_DB=${_MONGO_DB}'
-      - 'MONGO_CLUSTER=${_MONGO_CLUSTER}'
+      - 'MONGO_USER=$_MONGO_USER'
+      - 'MONGO_PASSWORD=$_MONGO_PASSWORD'
+      - 'MONGO_DB=$_MONGO_DB'
+      - 'MONGO_CLUSTER=$_MONGO_CLUSTER'
