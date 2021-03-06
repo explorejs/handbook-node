@@ -1,5 +1,12 @@
 const Express = require("express");
 const cors = require("cors");
+const rateLimit = require("express-rate-limit");
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // 100 requests max
+});
+
 const app = Express();
 
 const mongoRouter = require("./routes/mongoRouter");
@@ -19,6 +26,9 @@ const corsOptions = {
     }
   },
 };
+
+//Limit to 100 requests per 15 minutes
+app.use(limiter);
 
 app.use(Express.json());
 
