@@ -26,8 +26,8 @@ app.options("*", cors());
 
 app.use("/mongo", cors(corsOptions), mongoRouter);
 
-app.get("/", cors(corsOptions), (req, res) => {
-  res.send({ data: "Hi There" });
+app.get("/", (req, res) => {
+  res.send({ data: "Worldly Hellos" });
 });
 
 module.exports = app;
