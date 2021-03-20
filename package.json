@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "create-env": "printenv > .env",
     "deploy": "gcloud app deploy",
     "dev": "nodemon server.js",
     "start": "node server.js",

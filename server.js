@@ -1,6 +1,6 @@
+require("dotenv").config();
 const app = require("./src/app");
 const mongoose = require("mongoose");
-require("dotenv").config();
 
 /**
  * When deploying the environment may manage the port
