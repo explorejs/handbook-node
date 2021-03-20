@@ -1,9 +1,12 @@
 steps:
-  - name: "gcr.io/cloud-builders/gcloud"
-    args: ["app", "deploy"]
-    timeout: "1600s"
+  - name: node
+    entrypoint: npm
+    args: ["run", "create-env"]
     env:
       - 'MONGO_USER=$_MONGO_USER'
       - 'MONGO_PASSWORD=$_MONGO_PASSWORD'
       - 'MONGO_DB=$_MONGO_DB'
       - 'MONGO_CLUSTER=$_MONGO_CLUSTER'
+  - name: "gcr.io/cloud-builders/gcloud"
+    args: ["app", "deploy"]
+    timeout: "1600s"
