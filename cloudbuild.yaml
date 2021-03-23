@@ -7,6 +7,16 @@ steps:
       - 'MONGO_PASSWORD=$_MONGO_PASSWORD'
       - 'MONGO_DB=$_MONGO_DB'
       - 'MONGO_CLUSTER=$_MONGO_CLUSTER'
+      - 'GCP_TYPE=$_GCP_TYPE'
+      - 'GCP_PROJECT_ID=$_GCP_PROJECT_ID'
+      - 'GCP_PRIVATE_KEY_ID=$_GCP_PRIVATE_KEY_ID'
+      - 'GCP_PRIVATE_KEY=$_GCP_PRIVATE_KEY'
+      - 'GCP_CLIENT_EMAIL=$_GCP_CLIENT_EMAIL'
+      - 'GCP_CLIENT_ID=$_GCP_CLIENT_ID'
+      - 'GCP_AUTH_URI=$_GCP_AUTH_URI'
+      - 'GCP_TOKEN_URI=$_GCP_TOKEN_URI'
+      - 'GCP_AUTH_PROVIDER_X509_CERT_URL=$_GCP_AUTH_PROVIDER_X509_CERT_URL'
+      - 'GCP_CLIENT_X509_CERT_URL=$_GCP_CLIENT_X509_CERT_URL'
   - name: "gcr.io/cloud-builders/gcloud"
     args: ["app", "deploy"]
     timeout: "1600s"
