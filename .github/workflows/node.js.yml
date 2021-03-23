@@ -28,3 +28,18 @@ jobs:
     - run: npm ci
     - run: npm run build --if-present
     - run: npm test
+      env:
+        MONGO_USER: abcde
+        MONGO_PASSWORD: abcde
+        MONGO_DB: abcde
+        MONGO_CLUSTER: abcde
+        GCP_TYPE: abcde
+        GCP_PROJECT_ID: abcde
+        GCP_PRIVATE_KEY_ID: abcde
+        GCP_PRIVATE_KEY: abcde
+        GCP_CLIENT_EMAIL: abcde
+        GCP_CLIENT_ID: abcde
+        GCP_AUTH_URI: abcde
+        GCP_TOKEN_URI: abcde
+        GCP_AUTH_PROVIDER_X509_CERT_URL: abcde
+        GCP_CLIENT_X509_CERT_URL: abcde
