@@ -25,7 +25,10 @@ router.post(
       req.headers.authorization &&
       req.headers.authorization.startsWith("Bearer ")
     ) {
-      const token = authHeader.substring(7, authHeader.length);
+      const token = req.headers.authorization.substring(
+        7,
+        req.headers.authorization.length
+      );
       try {
         await admin
           .auth()
