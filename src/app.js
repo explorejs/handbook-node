@@ -1,6 +1,7 @@
 const Express = require("express");
 const cors = require("cors");
 const rateLimit = require("express-rate-limit");
+const fetch = require("node-fetch");
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
@@ -35,6 +36,24 @@ app.use(Express.json());
 app.options("*", cors());
 
 app.use("/mongo", cors(corsOptions), mongoRouter);
+
+app.use("/tags", async (req, res) => {
+  const { tag } = req.body;
+  try {
+    const result = await fetch(process.env.SLACK_TAG_HOOK, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        text: `New tag suggestion: ${tag} `,
+      }),
+    }).then((res) => res);
+    return res.status(200).send({ data: result });
+  } catch (e) {
+    return res.status(500).send({ error: e });
+  }
+});
 
 app.get("/", (req, res) => {
   res.send({ data: "Worldly Hellos" });

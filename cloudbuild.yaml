@@ -17,6 +17,7 @@ steps:
       - 'GCP_TOKEN_URI=$_GCP_TOKEN_URI'
       - 'GCP_AUTH_PROVIDER_X509_CERT_URL=$_GCP_AUTH_PROVIDER_X509_CERT_URL'
       - 'GCP_CLIENT_X509_CERT_URL=$_GCP_CLIENT_X509_CERT_URL'
+      - 'SLACK_TAG_HOOK=$_SLACK_TAG_HOOK'
   - name: "gcr.io/cloud-builders/gcloud"
     args: ["app", "deploy"]
     timeout: "1600s"
