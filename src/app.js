@@ -37,7 +37,7 @@ app.options("*", cors());
 
 app.use("/mongo", cors(corsOptions), mongoRouter);
 
-app.use("/tags", async (req, res) => {
+app.post("/tags", async (req, res) => {
   const { tag } = req.body;
   try {
     const result = await fetch(process.env.SLACK_TAG_HOOK, {
