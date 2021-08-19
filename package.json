@@ -30,6 +30,7 @@
     "express-validator": "^6.9.2",
     "firebase-admin": "^9.5.0",
     "mongoose": "^5.11.15",
+    "node-cache": "^5.1.2",
     "node-fetch": "^2.6.1"
   },
   "devDependencies": {
