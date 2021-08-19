@@ -1,12 +1,27 @@
 const express = require("express");
+const NodeCache = require("node-cache");
 const { body, validationResult } = require("express-validator");
 const admin = require("../adapters/firebase");
 const Record = require("../models/record");
 
 const router = express.Router();
+const mongoCache = new NodeCache();
 
 router.get("/", async (req, res) => {
-  const result = await Record.find({ status: "active" });
+  const MONGO_CACHE_KEY = "records";
+  let result = mongoCache.get(MONGO_CACHE_KEY);
+  if (result == undefined) {
+    console.log("cache miss");
+    result = await Record.find({ status: "active" });
+    const success = mongoCache.set(MONGO_CACHE_KEY, result, 5);
+    if(!success){
+      console.error("cache set failed")
+    }else {
+      console.log("success + " + success);
+    }
+  } else {
+    console.log("cache hit")
+  }
   res.send({ data: result });
 });
 
