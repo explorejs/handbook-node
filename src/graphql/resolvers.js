@@ -1,4 +1,3 @@
-const record = require("../models/record");
 const Record = require("../models/record")
 
 
