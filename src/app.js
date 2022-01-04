@@ -1,7 +1,14 @@
 const Express = require("express");
+const { ApolloServer } = require("apollo-server-express");
+const {
+  ApolloServerPluginLandingPageGraphQLPlayground
+} = require("apollo-server-core")
 const cors = require("cors");
 const rateLimit = require("express-rate-limit");
 const fetch = require("node-fetch");
+
+const resolvers = require("./graphql/resolvers")
+const typeDefs = require("./graphql/typedefs")
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
@@ -20,7 +27,9 @@ if (process.env.NODE_ENV !== "production") {
 
 const corsOptions = {
   origin: function (origin, callback) {
-    if (greenList.indexOf(origin) !== -1) {
+    if (process.env.NODE_ENV !== "production") {
+      callback(null, true);
+    } else if (greenList.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
       callback(new Error("Not allowed by CORS"));
@@ -28,8 +37,20 @@ const corsOptions = {
   },
 };
 
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  plugins: [
+    ApolloServerPluginLandingPageGraphQLPlayground(),
+  ],
+})
+
 //Limit to 100 requests per 15 minutes
 app.use(limiter);
+
+server.start().then(res => {
+  server.applyMiddleware({ app });
+})
 
 app.use(Express.json());
 

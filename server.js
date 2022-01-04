@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
  * When deploying the environment may manage the port
  * Locally we can default to 8080
  */
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 8080;
 
 mongoose
   .connect(
