@@ -23,12 +23,16 @@
   },
   "homepage": "https://github.com/explorejs/handbook-node#readme",
   "dependencies": {
+    "apollo-server-core": "^3.6.1",
+    "apollo-server-express": "^3.6.1",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-rate-limit": "^5.2.6",
     "express-validator": "^6.9.2",
     "firebase-admin": "^9.5.0",
+    "graphql": "^16.2.0",
+    "graphql-tag": "^2.12.6",
     "mongoose": "^5.11.15",
     "node-cache": "^5.1.2",
     "node-fetch": "^2.6.1"
