@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/explorejs/handbook-node#readme",
   "dependencies": {
-    "apollo-server-core": "^3.6.1",
+    "apollo-server-core": "^3.10.1",
     "apollo-server-express": "^3.6.1",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
